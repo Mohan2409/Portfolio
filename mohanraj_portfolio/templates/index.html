@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mohanraj K | Cybersecurity Analyst</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    />
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+    <!-- Top fixed header (full width) -->
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="topbar-left">
+                <div class="logo-circle">MK</div>
+                <span class="logo-text">Mohanraj<span class="accent">.K</span></span>
+            </div>
+            <nav class="topbar-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#education">Education</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+                <div class="topbar-cta">
+        <a class="resume-btn" href="{{ url_for('resume') }}" download rel="noopener" aria-label="Download resume">
+            <svg class="resume-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                <path d="M12 2v10m0 0-4-4m4 4 4-4M6 20h12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            Resume
+        </a>
+    </div>
+        </div>
+    </header>
+
+    <!-- Canvas hacker background layers -->
+    <canvas id="bg-mesh"></canvas>
+    <canvas id="bg-traces"></canvas>
+
+    <!-- Other background elements -->
+    <div class="bg-noise"></div>
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+    <div class="bg-blob bg-blob-3"></div>
+    <div class="hacker-grid"></div>
+
+    <main>
+        <!-- HERO / INTRO SECTION (Name is typed) -->
+        <section id="hero" class="hero-intro">
+            <div class="hero-intro-wrapper">
+                <div class="hero-intro-text">
+                    <!-- Typewriter container -->
+                    <h1 class="hero-intro-title">
+                        <span id="typed-name" aria-hidden="true"></span>
+                        <span class="cursor" aria-hidden="true">|</span>
+                    </h1>
+                    <p class="hero-intro-subtitle">Cybersecurity Analyst</p>
+
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn-primary">See Projects</a>
+                        <a href="#contact" class="btn-ghost">Get in Touch</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS STRIP -->
+        <section class="stats-strip">
+            {% for s in stats %}
+            <div class="stat-card">
+                <div class="stat-value">{{ s.value }}</div>
+                <div class="stat-label">{{ s.label }}</div>
+                <div class="stat-sub">{{ s.sub }}</div>
+            </div>
+            {% endfor %}
+        </section>
+
+        <!-- ABOUT (no big name here anymore) -->
+        <section id="about" class="section about-section">
+            <div class="about-wrapper">
+                <!-- LEFT: BIG PORTRAIT (kept) -->
+                <div class="about-photo-hero">
+                    <div class="about-photo-frame">
+                        <img
+                            src="{{ url_for('static', filename='img/profile.jpg') }}"
+                            alt="Portrait of Mohanraj"
+                        />
+                    </div>
+                </div>
+
+                <!-- RIGHT: GLASS PANEL (ACTS AS HERO CONTENT) -->
+                <div class="about-panel">
+                    <p class="about-tagline-small">01 · About</p>
+
+                    <p class="about-panel-text">
+                    I am a cybersecurity enthusiast with hands-on experience in 
+                    <strong>Vulnerability Assessment & Penetration Testing (VAPT), network security, 
+                    and incident analysis.</strong> My work involves identifying security risks, 
+                    analyzing real-world attacks, and strengthening systems through practical 
+                    defense strategies. I have gained experience using industry standard tools. 
+                    I enjoy exploring offensive security techniques, threat detection, and security automation.
+
+                    </p>
+
+                    <p class="about-panel-text">
+                    Beyond technical skills, I bring a proactive attitude, 
+                    adaptability, and a passion for understanding how systems work and 
+                    how they can be secured. I am actively seeking opportunities where 
+                    I can contribute to real-world security challenges, grow as a professional, 
+                    and make a meaningful impact in the cybersecurity landscape.
+                    </p>
+
+                    <div class="about-metrics">
+                        <div class="about-metric">
+                            <div class="about-metric-value">4+</div>
+                            <div class="about-metric-label">Security / Infra Projects</div>
+                        </div>
+                        <div class="about-metric">
+                            <div class="about-metric-value">3</div>
+                            <div class="about-metric-label">Domains</div>
+                        </div>
+                        <div class="about-metric">
+                            <div class="about-metric-value">100%</div>
+                            <div class="about-metric-label">Ownership & Learning</div>
+                        </div>
+                    </div>
+
+                    <div class="about-quick-grid">
+                        <div class="about-quick-item">
+                            <span class="about-quick-label">Phone</span>
+                            <span class="about-quick-value">{{ socials.phone }}</span>
+                        </div>
+                        <div class="about-quick-item">
+                            <span class="about-quick-label">Email</span>
+                            <span class="about-quick-value">
+                                <a href="mailto:{{ socials.email }}">{{ socials.email }}</a>
+                            </span>
+                        </div>
+                        <div class="about-quick-item">
+                            <span class="about-quick-label">Education</span>
+                            <span class="about-quick-value">
+                                B.Tech CSE (Cyber Security)
+                            </span>
+                        </div>
+                        <div class="about-quick-item">
+                            <span class="about-quick-label">Based In</span>
+                            <span class="about-quick-value">
+                            Chennai, Tamil Nadu, India
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="hero-buttons" style="margin-top: 14px;">
+                        <a href="#projects" class="btn-primary">View Projects</a>
+                        <a href="#contact" class="btn-ghost">Let’s Collaborate</a>
+                        <a href="{{ url_for('resume') }}" class="btn-outline" target="_blank" rel="noopener">
+                            Download Resume
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section id="experience" class="section">
+            <div class="section-header">
+                <p class="section-tag">02 · Experience</p>
+                <h2>Where I’ve learned by doing</h2>
+            </div>
+
+            <div class="timeline">
+                {% for item in experience %}
+                <a href="{{ url_for('experience_detail', exp_id=item.id) }}" class="timeline-link">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content card card-clickable">
+                            <h3>{{ item.title }} — <span class="accent">{{ item.org }}</span></h3>
+                            <p class="timeline-meta">{{ item.meta }}</p>
+                            <p>{{ item.short }}</p>
+                            <span class="card-cta">View details →</span>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- EDUCATION -->
+        <section id="education" class="section section-alt">
+            <div class="section-header">
+                <p class="section-tag">03 · Education</p>
+                <h2>Where I built my foundations</h2>
+            </div>
+
+            <div class="section-grid">
+                {% for e in education %}
+                <div class="card">
+                    <h3>{{ e.degree }}</h3>
+                    <p class="timeline-meta">{{ e.focus }}</p>
+                    <p><strong>{{ e.inst }}</strong></p>
+                    <p class="edu-meta">{{ e.years }} · {{ e.location }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills" class="section">
+            <div class="section-header">
+                <p class="section-tag">04 · Skills</p>
+                <h2>How I contribute to a team</h2>
+            </div>
+
+            <div class="skills-grid">
+                {% for heading, list in skills.items() %}
+                <div class="card">
+                    <h3>{{ heading }}</h3>
+                    <ul class="bulleted">
+                        {% for item in list %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects" class="section section-alt">
+            <div class="section-header">
+                <p class="section-tag">05 · Projects</p>
+                <h2>Things I’ve built, broken, and secured</h2>
+            </div>
+
+            <div class="section-grid projects-grid">
+                {% for project in projects %}
+                <a href="{{ url_for('project_detail', proj_id=project.id) }}" class="card-link">
+                    <div class="card project-card card-clickable">
+                        <div class="project-header">
+                            <h3>{{ project.name }}</h3>
+                            <span class="project-badge">Security / Infra</span>
+                        </div>
+                        <p class="project-meta">{{ project.meta }}</p>
+                        <p>{{ project.short }}</p>
+                        <span class="card-cta">View details →</span>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- CERTIFICATIONS -->
+        <section id="certifications" class="section">
+            <div class="section-header">
+                <p class="section-tag">06 · Certifications</p>
+                <h2>What backs my skills</h2>
+            </div>
+
+            <div class="section-grid">
+                {% for c in certifications %}
+                <a href="{{ url_for('certification_detail', cert_id=c.id) }}" class="card-link">
+                    <div class="card card-clickable">
+                        <h3>{{ c.title }}</h3>
+                        <p class="timeline-meta">{{ c.issuer }} · {{ c.when }}</p>
+                        <p>{{ c.desc }}</p>
+                        <span class="card-cta">View certificate →</span>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- HIGHLIGHTS -->
+        <section id="achievements" class="section section-alt">
+            <div class="section-header">
+                <p class="section-tag">07 · Highlights</p>
+                <h2>Moments I’m proud of</h2>
+            </div>
+
+            <div class="section-grid">
+                <div class="card">
+                    <ul class="bulleted">
+                        {% for a in achievements %}
+                        <li>{{ a }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+                <!-- HOBBIES -->
+        <section id="HOBBIES" class="section hobbies-section">
+            <div class="section-header">
+                <p class="section-tag">08 · Also Check out</p>
+                <h2>My Youtube Channel</h2>
+            </div>
+
+            <div class="hobbies-content">
+                <div class="card">
+            <a href="https://youtube.com/@ryumastreams" target="_blank" class="btn-yt">
+    <span class="yt-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.5 6.2s-.2-1.7-.9-2.4c-.8-.9-1.7-.9-2.1-.9C16.8 2.6 12 2.6 12 2.6h-.1s-4.8 0-8.5.3c-.4 0-1.3 0-2.1.9C.7 4.5.5 6.2.5 6.2S0 8.3 0 10.5v2.9c0 2.2.5 4.3.5 4.3s.2 1.7.9 2.4c.8.9 1.9.9 2.4 1 1.8.2 7.6.3 7.6.3s4.8 0 8.5-.3c.4 0 1.3 0 2.1-.9.7-.7.9-2.4.9-2.4s.5-2.1.5-4.3v-2.9c0-2.2-.5-4.3-.5-4.3zM9.7 15.6V8.4l6.2 3.6-6.2 3.6z"/>
+        </svg>
+    </span>
+    Ryuma Streams
+</a>
+            </div>
+            </div>
+        </section>
+       
+        <!-- CONTACT -->
+<section id="contact" class="section contact-section">
+    <div class="section-header">
+        <p class="section-tag">09 · Contact</p>
+        <h2>Contact Me</h2>
+    </div>
+
+    <div class="contact-layout">
+        <!-- LEFT -->
+        <div class="contact-left">
+            <h2>CONTACT ME</h2>
+            <p class="contact-sub">
+                We are looking forward to hearing from you soon.
+            </p>
+
+            <ul class="contact-info">
+                <li>
+                    <span>📍</span>
+                    Chennai, Tamil Nadu
+                </li>
+                <li>
+                    <span>📧</span>
+                    <a href="mailto:{{ socials.email }}">{{ socials.email }}</a>
+                </li>
+                <li>
+                    <span>📞</span>
+                    {{ socials.phone }}
+                </li>
+            </ul>
+
+            <div class="contact-socials">
+             <a href="{{ socials.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="{{ socials.instagram }}" target="_blank" rel="noopener">Instagram</a>
+            <a href="{{ socials.github }}" target="_blank" rel="noopener">GitHub</a>
+</div>
+
+        </div>
+
+        <!-- RIGHT SIDE: form -->
+<div class="contact-right card contact-form-card">
+<form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+    <!-- REQUIRED SECRET KEY -->
+    <input type="hidden" name="access_key" value="45ec1e30-d311-4ccd-972c-c21749a2607c">
+    <!-- Subject of the email you receive -->
+    <input type="hidden" name="subject" value="New Contact Message from Portfolio">
+
+    <!-- Optional autoresponse -->
+    <input type="hidden" name="from_name" value="Portfolio Website">
+
+    <div class="contact-field">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" placeholder="Your name" required />
+    </div>
+
+    <div class="contact-field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" required />
+    </div>
+
+    <div class="contact-field">
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" type="tel" placeholder="+91 ..." />
+    </div>
+
+    <div class="contact-field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" placeholder="I’d love to hear from you. Share anything — I always respond." required></textarea>
+    </div>
+
+    <div class="contact-submit-row">
+        <button type="submit" class="btn-contact-submit">Send</button>
+    </div>
+</form>
+<div id="form-status" class="form-status"></div>
+    </div>
+    </div>
+</section>
+
+    </main>
+
+    <footer class="footer">
+        <span>© {{ year }} · Mohanraj K · </span>
+        <span class="footer-tagline">Cybersecurity · Reliability · Trust.</span>
+    </footer>
+    <!-- background script (mesh + traces) -->
+    <script src="{{ url_for('static', filename='js/bg-mesh-traces.js') }}"></script>
+
+    <!-- typing script for hero name -->
+    <script src="{{ url_for('static', filename='js/hero-typing.js') }}"></script>
+<div id="successToast" class="success-toast">
+    ✅ Message sent successfully!
+</div>
+<script src="{{ url_for('static', filename='js/contact.js') }}"></script>
+<!-- EmailJS SDK -->
+<script src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
+
+<!-- Your contact handler -->
+<script src="{{ url_for('static', filename='js/contact-emailjs.js') }}"></script>
+<script>
+document.querySelector(".contact-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const status = document.getElementById("form-status");
+    const data = new FormData(form);
+
+    status.innerHTML = "Sending...";
+
+    fetch(form.action, {
+        method: "POST",
+        body: data,
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            status.innerHTML = "Message sent successfully!";
+            form.reset();
+        } else {
+            status.innerHTML = "Something went wrong. Try again.";
+        }
+    })
+    .catch(() => {
+        status.innerHTML = "Network error. Try later.";
+    });
+});
+</script>   
+</body>
+</html>

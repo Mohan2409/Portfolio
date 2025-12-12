@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>{{ item.title }} · Certification · Mohanraj K</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+    <div class="bg-noise"></div>
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+
+    <header class="nav">
+        <div class="nav-left">
+            <div class="logo-circle">MK</div>
+            <span class="logo-text">Mohanraj<span class="accent">.dev</span></span>
+        </div>
+        <nav class="nav-links">
+            <a href="{{ url_for('home') }}">← Back to Home</a>
+        </nav>
+    </header>
+
+    <main class="detail-main">
+        <section class="detail-section">
+            <div class="section-header detail-header">
+                <p class="section-tag">Certification Detail</p>
+                <h1>{{ item.title }}</h1>
+                <p class="timeline-meta">{{ item.issuer }} · {{ item.when }}</p>
+                <p>{{ item.desc }}</p>
+            </div>
+
+            <div class="detail-grid">
+                <div class="card detail-image-card">
+                    <h3>Certificate</h3>
+                    <div class="detail-image-wrapper">
+                        <embed
+                            src="{{ url_for('static', filename=item.image) }}"
+                            type="application/pdf"
+                        />
+                    </div>
+                    <p class="detail-caption">
+                        Certificate preview.
+                        <a href="{{ url_for('static', filename=item.image) }}" target="_blank" rel="noopener">
+                            Open full PDF ↗
+                        </a>
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>What it represents</h3>
+                    {% if item.details %}
+                    <ul class="bulleted">
+                        {% for d in item.details %}
+                        <li>{{ d }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>This certification backs my skills and practical exposure in this area.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <span>© {{ year }} · Mohanraj K</span>
+        <span class="footer-tagline">Always learning. Always securing.</span>
+    </footer>
+</body>
+</html>
